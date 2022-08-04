@@ -22,6 +22,7 @@ import LogoutVariant from 'mdi-material-ui/LogoutVariant'
 import AccountOutline from 'mdi-material-ui/AccountOutline'
 import MessageOutline from 'mdi-material-ui/MessageOutline'
 import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
+import { signOut, useSession } from 'next-auth/react'
 
 // ** Styled Components
 const BadgeContentSpan = styled('span')(({ theme }) => ({
@@ -35,6 +36,7 @@ const BadgeContentSpan = styled('span')(({ theme }) => ({
 const UserDropdown = () => {
   // ** States
   const [anchorEl, setAnchorEl] = useState<Element | null>(null)
+  const { data: session } = useSession()
 
   // ** Hooks
   const router = useRouter()
@@ -48,6 +50,11 @@ const UserDropdown = () => {
       router.push(url)
     }
     setAnchorEl(null)
+  }
+
+  const handleSignOut = () => {
+    signOut()
+    handleDropdownClose('pages/login')
   }
 
   const styles = {
@@ -74,10 +81,10 @@ const UserDropdown = () => {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       >
         <Avatar
-          alt='John Doe'
+          alt={session?.user ? session.user.name : 'John Doe'}
           onClick={handleDropdownOpen}
           sx={{ width: 40, height: 40 }}
-          src='/images/avatars/1.png'
+          src={session?.user ? session.user.image : '/images/avatars/1.png'}
         />
       </Badge>
       <Menu
@@ -95,10 +102,10 @@ const UserDropdown = () => {
               badgeContent={<BadgeContentSpan />}
               anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             >
-              <Avatar alt='John Doe' src='/images/avatars/1.png' sx={{ width: '2.5rem', height: '2.5rem' }} />
+              <Avatar alt={session?.user ? session.user.name : 'John Doe'} src={session?.user ? session.user.image : '/images/avatars/1.png'} sx={{ width: '2.5rem', height: '2.5rem' }} />
             </Badge>
             <Box sx={{ display: 'flex', marginLeft: 3, alignItems: 'flex-start', flexDirection: 'column' }}>
-              <Typography sx={{ fontWeight: 600 }}>John Doe</Typography>
+            <Typography sx={{ fontWeight: 600 }}>{session?.user ? session.user.name : 'John Doe'}</Typography>
               <Typography variant='body2' sx={{ fontSize: '0.8rem', color: 'text.disabled' }}>
                 Admin
               </Typography>
@@ -144,7 +151,7 @@ const UserDropdown = () => {
           </Box>
         </MenuItem>
         <Divider />
-        <MenuItem sx={{ py: 2 }} onClick={() => handleDropdownClose('/pages/login')}>
+        <MenuItem sx={{ py: 2 }} onClick={() => handleSignOut()}>
           <LogoutVariant sx={{ marginRight: 2, fontSize: '1.375rem', color: 'text.secondary' }} />
           Logout
         </MenuItem>

@@ -39,6 +39,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 // ** Demo Imports
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
 
+import { signIn } from 'next-auth/react'
 interface State {
   password: string
   showPassword: boolean
@@ -83,6 +84,13 @@ const LoginPage = () => {
 
   const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
+  }
+
+  const handleGithub = async(e: MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    signIn("github",{
+      callbackUrl: `${window.location.origin}/`,
+    })
   }
 
   return (
@@ -232,7 +240,7 @@ const LoginPage = () => {
                 </IconButton>
               </Link>
               <Link href='/' passHref>
-                <IconButton component='a' onClick={(e: MouseEvent<HTMLElement>) => e.preventDefault()}>
+                <IconButton component='a' onClick={handleGithub}>
                   <Github
                     sx={{ color: theme => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
                   />
