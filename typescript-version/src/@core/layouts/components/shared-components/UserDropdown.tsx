@@ -54,7 +54,7 @@ const UserDropdown = () => {
 
   const handleSignOut = () => {
     signOut()
-    handleDropdownClose('pages/login')
+    handleDropdownClose('/pages/login')
   }
 
   const styles = {

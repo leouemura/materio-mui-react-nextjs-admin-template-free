@@ -62,7 +62,7 @@ const App = (props: ExtendedAppProps) => {
   const getLayout = Component.getLayout ?? (page => <UserLayout>{page}</UserLayout>)
 
   return (
-    // <CacheProvider value={emotionCache}>
+    <CacheProvider value={emotionCache}>
       <SessionProvider session={session}>
 
         <Head>
@@ -83,7 +83,7 @@ const App = (props: ExtendedAppProps) => {
           </SettingsConsumer>
         </SettingsProvider>
       </SessionProvider>
-    // </CacheProvider>
+    </CacheProvider>
   )
 }
 

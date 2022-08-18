@@ -6,3 +6,5 @@ declare module 'next' {
     getLayout?: (page: ReactElement) => ReactNode
   }
 }
+
+declare module '*.png';

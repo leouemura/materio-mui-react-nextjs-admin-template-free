@@ -41,15 +41,17 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  username      String? 
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  
+  id               String    @id @default(cuid())
+  name             String?
+  username         String?
+  email            String?   @unique
+  emailVerified    DateTime?
+  image            String?
+  accounts         Account[]
+  sessions         Session[]
+  stripeCustomerId String?
+  isActive         Boolean   @default(false)
+  isAdmin          Boolean   @default(false)
 }
 
 model VerificationToken {
@@ -58,4 +60,35 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Module {
+  id                    String                  @id @default(cuid())
+  title                 String                  @unique
+  Notebooks             Notebooks[]
+  UserModulesCompleted  UserModulesCompleted[]
+  UserModulesInProgress UserModulesInProgress[]
+}
+
+// one Module can hold n Notebooks
+model Notebooks {
+  id       String @id @default(cuid())
+  title    String @unique
+  author   String
+  moduleId String
+  module   Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+}
+
+model UserModulesCompleted {
+  id       String @id @default(cuid())
+  userId   String
+  moduleId String
+  module   Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+}
+
+model UserModulesInProgress {
+  id       String @id @default(cuid())
+  userId   String
+  moduleId String
+  module   Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
 }
