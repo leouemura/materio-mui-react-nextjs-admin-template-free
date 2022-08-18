@@ -24,6 +24,7 @@ import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 interface Props {
   hidden: boolean
   navWidth: number
+  setCustomNavWidth: (customNavWidth: number) => void
   settings: Settings
   children: ReactNode
   navVisible: boolean

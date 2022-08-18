@@ -28,6 +28,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200).json({items: dbInProgress})
     }
 
+    // extended functionality list all by userId
+    const userId = req.query.userId
+    if (userId !== undefined) {
+        const dbInProgress: InProgress = await prisma.userModulesInProgress.findMany({
+          where: {
+            userId: userId,
+          },
+        })
+        if (dbInProgress == undefined) {
+          res.status(400).json({ error: "InProgress not found." })
+          return
+        }
+        res.status(200).json({items: dbInProgress})
+      }
+
     const inProgress: InProgress[] = await prisma.userModulesInProgress.findMany()
     const response: ResponseInProgress = { items: inProgress }
     res.status(200).json(response)

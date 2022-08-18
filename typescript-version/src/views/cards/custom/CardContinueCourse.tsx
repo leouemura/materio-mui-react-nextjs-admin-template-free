@@ -21,7 +21,11 @@ const StyledBox = styled(Box)<BoxProps>(({ theme }) => ({
   }
 }))
 
-const CardContinueCourse = () => {
+interface Props {
+  title: string
+}
+const CardContinueCourse:React.FC<Props> = (props) => {
+  const {title} = props
   return (
     <Card>
       <Grid container spacing={6}>
@@ -31,7 +35,7 @@ const CardContinueCourse = () => {
               Bora continuar o módulo
             </Typography>
             <Typography variant='h6'>
-              {`Python Básico ?`}
+              {`${title} ?`}
             </Typography>
             <Divider sx={{ marginTop: 6.5, marginBottom: 6.75 }} />
             <Button variant='contained'>Retomar de onde parei</Button>

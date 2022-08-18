@@ -29,6 +29,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200).json({items: dbNotebook})
     }
 
+    // extended functionality list all by moduleId
+    const moduleId = req.query.moduleId
+    if (moduleId !== undefined) {
+      const dbNotebook: Notebook = await prisma.notebooks.findMany({
+        where: {
+          moduleId: moduleId,
+        },
+      })
+      if (dbNotebook == undefined) {
+        res.status(400).json({ error: "Notebook not found." })
+        return
+      }
+      res.status(200).json({items: dbNotebook})
+    }
+
     const notebook: Notebook[] = await prisma.notebooks.findMany()
     const response: ResponseNotebook = { items: notebook }
     res.status(200).json(response)

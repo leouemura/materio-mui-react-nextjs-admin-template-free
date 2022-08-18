@@ -18,6 +18,7 @@ import themeConfig from 'src/configs/themeConfig'
 interface Props {
   hidden: boolean
   settings: Settings
+  navVisible: boolean
   toggleNavVisibility: () => void
   saveSettings: (values: Settings) => void
   verticalNavMenuBranding?: (props?: any) => ReactNode
@@ -49,7 +50,7 @@ const StyledLink = styled('a')({
 
 const VerticalNavHeader = (props: Props) => {
   // ** Props
-  const { verticalNavMenuBranding: userVerticalNavMenuBranding } = props
+  const { verticalNavMenuBranding: userVerticalNavMenuBranding, navVisible} = props
 
   // ** Hooks
   const theme = useTheme()
@@ -121,7 +122,8 @@ const VerticalNavHeader = (props: Props) => {
               </g>
             </svg>
             <HeaderTitle variant='h6' sx={{ ml: 3 }}>
-              {themeConfig.templateName}
+              
+              {navVisible?themeConfig.templateName: ""}
             </HeaderTitle>
           </StyledLink>
         </Link>

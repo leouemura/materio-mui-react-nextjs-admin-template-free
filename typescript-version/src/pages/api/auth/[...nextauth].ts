@@ -31,17 +31,28 @@ export default NextAuth({
     adapter: PrismaAdapter(prisma),
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
-        session: ({ session, user }) => ({
+        session: ({ session, user }) => {
+            console.log("******************************")
+            console.log("creating session :>>", session)
+            console.log("******************************")
+            console.log("******************************")
+            console.log("creating user :>>", user)
+            console.log("******************************")
+            return({
             ...session,
             user: {
                 ...session.user,
                 id: user.id,
                 username: user.username,
             },
-        })
+        })}
     },
     events: {
         createUser: async ({ user }) => {
+            console.log("******************************")
+            console.log("creating user :>>", user)
+            console.log("******************************")
+
             // Create stripe API client using the secret key env variable
             const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
                 apiVersion: "2022-08-01",

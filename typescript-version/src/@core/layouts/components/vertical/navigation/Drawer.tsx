@@ -7,6 +7,7 @@ import MuiSwipeableDrawer, { SwipeableDrawerProps } from '@mui/material/Swipeabl
 
 // ** Type Import
 import { Settings } from 'src/@core/context/settingsContext'
+import themeConfig from 'src/configs/themeConfig'
 
 interface Props {
   hidden: boolean
@@ -14,6 +15,7 @@ interface Props {
   settings: Settings
   navVisible: boolean
   children: ReactNode
+  setCustomNavWidth: (customNavWidth: number) => void
   setNavVisible: (value: boolean) => void
   saveSettings: (values: Settings) => void
 }
@@ -38,7 +40,7 @@ const SwipeableDrawer = styled(MuiSwipeableDrawer)<SwipeableDrawerProps>({
 
 const Drawer = (props: Props) => {
   // ** Props
-  const { hidden, children, navWidth, navVisible, setNavVisible } = props
+  const { hidden, children, navWidth, navVisible, setNavVisible, setCustomNavWidth } = props
 
   // ** Hook
   const theme = useTheme()
@@ -59,7 +61,11 @@ const Drawer = (props: Props) => {
     onOpen: () => null,
     onClose: () => null
   }
-
+  if(!navVisible){
+    setCustomNavWidth(100)
+  } else {
+    setCustomNavWidth(260)
+  }
   return (
     <SwipeableDrawer
       className='layout-vertical-nav'
@@ -67,7 +73,7 @@ const Drawer = (props: Props) => {
       {...(hidden ? { ...MobileDrawerProps } : { ...DesktopDrawerProps })}
       PaperProps={{ sx: { width: navWidth } }}
       sx={{
-        width: navWidth,
+        ...(navVisible?{width: navWidth,}: {width: navWidth,}),
         '& .MuiDrawer-paper': {
           borderRight: 0,
           backgroundColor: theme.palette.background.default

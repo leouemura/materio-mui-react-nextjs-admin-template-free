@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 // ** MUI Imports
 import Fab from '@mui/material/Fab'
@@ -55,7 +55,7 @@ const VerticalLayout = (props: LayoutProps) => {
   // ** Vars
   const { contentWidth } = settings
   const navWidth = themeConfig.navigationSize
-
+  const [customNavWidth, setCustomNavWidth] = React.useState<number>(navWidth)
   // ** States
   const [navVisible, setNavVisible] = useState<boolean>(false)
 
@@ -67,7 +67,8 @@ const VerticalLayout = (props: LayoutProps) => {
       <VerticalLayoutWrapper className='layout-wrapper'>
         {/* Navigation Menu */}
         <Navigation
-          navWidth={navWidth}
+          navWidth={customNavWidth}
+          setCustomNavWidth={setCustomNavWidth}
           navVisible={navVisible}
           setNavVisible={setNavVisible}
           toggleNavVisibility={toggleNavVisibility}
@@ -83,7 +84,7 @@ const VerticalLayout = (props: LayoutProps) => {
             sx={{
               ...(contentWidth === 'boxed' && {
                 mx: 'auto',
-                '@media (min-width:1440px)': { maxWidth: 1440 },
+                '@media (min-width:1440px)': { maxWidth: 1740 },
                 '@media (min-width:1200px)': { maxWidth: '100%' }
               })
             }}

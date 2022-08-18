@@ -6,7 +6,13 @@ import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import { Box, Grid } from '@mui/material'
 
-const CardStatistics = () => {
+interface Props {
+    completed: number
+    inProgress: number
+}
+const CardStatistics:React.FC<Props> = (props) => {
+    const {completed, inProgress} = props
+
     return (
         <Card>
             <CardContent sx={{ padding: theme => `${theme.spacing(3, 5.25, 4)} !important` }}>
@@ -25,7 +31,7 @@ const CardStatistics = () => {
                         }}>
                             <Grid container spacing={12}>
                                 <Grid item xs={12} sm={3}>
-                                    <Typography variant='h6' sx={{ marginBottom: 3, marginTop: 3 }}>12</Typography>
+                                    <Typography variant='h6' sx={{ marginBottom: 3, marginTop: 3 }}>{completed}</Typography>
                                 </Grid>
                                 <Grid item xs={12} sm={8}>
                                     <Typography variant='body1'>Courses Completed</Typography>
@@ -44,7 +50,7 @@ const CardStatistics = () => {
                         }}>
                             <Grid container spacing={12}>
                                 <Grid item xs={12} sm={2}>
-                                    <Typography variant='h6' sx={{ marginBottom: 3, marginTop: 3 }}>3</Typography>
+                                    <Typography variant='h6' sx={{ marginBottom: 3, marginTop: 3 }}>{inProgress}</Typography>
                                 </Grid>
                                 <Grid item xs={12} sm={8}>
                                     <Typography variant='body1'>Courses in  progress</Typography>

@@ -47,7 +47,7 @@ const navigation = (): VerticalNavItemsType => {
       openInNewTab: true
     },
     {
-      sectionTitle: 'User Interface'
+      sectionTitle: 'UI'
     },
     {
       title: 'Typography',

@@ -28,6 +28,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200).json({items: dbCompleted})
     }
 
+    // extended functionality list all by userId
+    const userId = req.query.userId
+    if (userId !== undefined) {
+      const dbCompleted: Completed[] = await prisma.userModulesCompleted.findMany({
+        where: {
+          userId: userId,
+        },
+      })
+      if (dbCompleted == undefined) {
+        res.status(400).json({ error: "Completed not found." })
+        return
+      }
+      res.status(200).json({items: dbCompleted})
+    }
+
+
     const completed: Completed[] = await prisma.userModulesCompleted.findMany()
     const response: ResponseCompleted = { items: completed }
     res.status(200).json(response)

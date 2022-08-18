@@ -12,23 +12,29 @@ import Twitter from 'mdi-material-ui/Twitter'
 import ShareVariant from 'mdi-material-ui/ShareVariant'
 import Button from '@mui/material/Button';
 
-
-const CardNotebookStats = () => {
+interface Props {
+    order: number
+    title: string
+    author: string
+}
+const CardNotebookStats: React.FC<Props> = (props) => {
+    const { order, title, author } = props
     return (
-        <Card sx={{ border: 0, boxShadow: 0, backgroundColor: 'common.white' }}>
+        <Card sx={{ border: 0, boxShadow: 0, backgroundColor: 'common.white', marginBottom:3.5 }}>
             <CardContent sx={{ padding: theme => `${theme.spacing(3.25, 5, 4.5)} !important` }}>
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
                     {/* <Box sx={{ mr: 2, display: 'flex', alignItems: 'center' }}> */}
                     <Box sx={{ display: 'flex', alignItems: 'center', mr: 3.5 }}>
                         <Typography variant='h4'>
-                            01
+                            { order ? order : 0}
                         </Typography>
-                    </Box>                    <Box sx={{ display: 'flex', alignItems: 'center', mr: 3.5, flexDirection: 'column' }}>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', mr: 3.5, flexDirection: 'column' }}>
                         <Typography variant='h6'>
-                            Learn Python
+                            {title ? title : "no title found for this module"}
                         </Typography>
                         <Typography variant='inherit'>
-                            by Georges
+                            by {author ? author : "Unknown"}
                         </Typography>
 
                     </Box>
