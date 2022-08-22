@@ -37,3 +37,6 @@ yarn-error.log*
 *.tsbuildinfo
 
 .env
+
+# staging
+src/api
