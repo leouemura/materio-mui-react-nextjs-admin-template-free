@@ -6,7 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Security from '@mui/icons-material/Security';
 import { CustomTable, TableHeaderToolbar } from 'src/components/CustomTable';
 import Alert, { AlertColor } from '@mui/material/Alert'
-import { AlertData } from '../TabCreateModules';
+import { AlertData } from '../TabFormModules';
 import AlertTitle from '@mui/material/AlertTitle'
 
 import Add from 'mdi-material-ui/PlusCircle'

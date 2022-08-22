@@ -59,7 +59,7 @@ export interface AlertData {
     message: string
 }
 
-const TabCreateModules: React.FC<Props> = (props) => {
+const TabFormModules: React.FC<Props> = (props) => {
     const { moduleData, clearData, page, setPage } = props
     // ** State
     const [openAlert, setOpenAlert] = useState<boolean>(false)
@@ -133,7 +133,7 @@ const TabCreateModules: React.FC<Props> = (props) => {
             <form>
                 <Grid container spacing={7}>
                     <Grid item xs={11} sx={{ marginTop: 4.8, marginBottom: 3 }}>
-                        <Typography >Cadastro de Módulo</Typography>
+                        <Typography >{page === "create" ? "Cadastrar Módulo" : "Editar Módulo"}</Typography>
                     </Grid>
                     <Grid item xs={1} sx={{ marginTop: 4.8, marginBottom: 3 }}>
                         <IconButton size='small' color='inherit' aria-label='close' onClick={() => { clearData(undefined); setPage("list") }}>
@@ -176,4 +176,4 @@ const TabCreateModules: React.FC<Props> = (props) => {
     )
 }
 
-export default TabCreateModules
+export default TabFormModules

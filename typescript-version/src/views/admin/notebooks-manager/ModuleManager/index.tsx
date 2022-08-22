@@ -1,6 +1,6 @@
 import React from 'react';
 import { Module, ModulesTable } from '../ModulesTable';
-import TabCreateModules from '../TabCreateModules';
+import TabFormModules from '../TabFormModules';
 
 
 export const ModuleManager: React.FC = () => {
@@ -13,10 +13,10 @@ export const ModuleManager: React.FC = () => {
                 <ModulesTable onModuleUpdate={setModuleData} /*onModulesDelete={null}*/ setPage={setPage} />
             )}
             {page === "edit" && (
-                <TabCreateModules moduleData={moduleData} clearData={setModuleData} setPage={setPage} page={page} />
+                <TabFormModules moduleData={moduleData} clearData={setModuleData} setPage={setPage} page={page} />
             )}
             {page === "create" && (
-                <TabCreateModules moduleData={moduleData} clearData={setModuleData} setPage={setPage} page={page} />
+                <TabFormModules moduleData={moduleData} clearData={setModuleData} setPage={setPage} page={page} />
             )}
         </>
     )
